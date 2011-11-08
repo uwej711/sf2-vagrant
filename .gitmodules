@@ -1,0 +1,6 @@
+[submodule "cookbooks"]
+	path = cookbooks
+	url = http://github.com/uwej711/cookbooks.git
+[submodule "symfony"]
+	path = symfony
+	url = http://github.com/uwej711/sf2-playground.git
