@@ -21,8 +21,8 @@ Vagrant::Config.run do |config|
   # computers to access the VM, whereas host only networking does not.
   config.vm.forward_port "http", 80, 8080
 
+  config.vm.network "33.33.33.10"
   if !RUBY_PLATFORM.include? "mswin"
-    config.vm.network "33.33.33.10"
     config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
   end
 
@@ -59,6 +59,7 @@ Vagrant::Config.run do |config|
   #
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "proxy"
     chef.add_recipe "symfony2"
  
     # You may also specify custom JSON attributes:
