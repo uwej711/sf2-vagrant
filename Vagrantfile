@@ -19,9 +19,14 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  config.vm.forward_port "http", 80, 8080
+  # deprecated in 0.9.0
+  #config.vm.forward_port "http", 80, 8080
+  config.vm.forward_port 80, 8080  
+  
+  #deprecated in 0.9.0
+  #config.vm.network "33.33.33.10"
+  config.vm.network :hostonly, "33.33.33.10"
 
-  config.vm.network "33.33.33.10"
   if !RUBY_PLATFORM.include? "mswin"
     config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
   end
@@ -59,6 +64,7 @@ Vagrant::Config.run do |config|
   #
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "apt"
     chef.add_recipe "proxy"
     chef.add_recipe "symfony2"
  
