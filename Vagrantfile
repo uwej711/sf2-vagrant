@@ -64,12 +64,15 @@ Vagrant::Config.run do |config|
   #
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
-    chef.add_recipe "apt"
     chef.add_recipe "proxy"
     chef.add_recipe "symfony2"
  
     # You may also specify custom JSON attributes:
-    #chef.json = { :mysql_password => "foo" }
+    chef.json.merge!({
+      :mysql => {
+        :server_root_password => "AWNmcnvrN_o_pSYt3mPf"
+      }
+    })
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
